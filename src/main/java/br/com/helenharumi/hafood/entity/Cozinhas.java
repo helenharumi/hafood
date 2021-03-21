@@ -7,8 +7,8 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "tb_cozinha")
-public class Cozinha {
+@Table(name = "tb_cozinhas")
+public class Cozinhas {
     @Id
     @GeneratedValue
     private Long id;

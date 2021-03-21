@@ -2,7 +2,7 @@ package br.com.helenharumi.hafood.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CozinhaDTO {
+public class CozinhasDTO {
     @JsonProperty("nome")
     private String nome;
 
