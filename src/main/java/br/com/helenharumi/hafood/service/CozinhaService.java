@@ -35,4 +35,11 @@ public class CozinhaService {
         cozinhaRepository.deleteById(id);
     }
 
+    public Cozinha alterar(Long id, CozinhaDTO cozinhaDTO){
+        Cozinha cozinha = cozinhaRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        cozinha.setNome(cozinhaDTO.getNome());
+        cozinhaRepository.save(cozinha);
+        return cozinha;
+    }
 }
+

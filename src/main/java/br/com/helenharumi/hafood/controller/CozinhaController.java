@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import java.security.cert.X509Certificate;
 import java.util.List;
 
 @RestController
@@ -42,5 +43,11 @@ public class CozinhaController {
         }catch (EntityNotFoundException e){
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PutMapping("{id}")
+    public Cozinha alterar(@PathVariable(name="id") Long id,
+                           @RequestBody CozinhaDTO cozinhaDTO){
+        return cozinhaService.alterar(id,cozinhaDTO);
     }
 }
