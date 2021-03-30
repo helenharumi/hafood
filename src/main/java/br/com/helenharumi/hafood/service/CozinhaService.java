@@ -7,6 +7,7 @@ import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -27,6 +28,11 @@ public class CozinhaService {
 
     public Cozinha buscar(String nome){
         return cozinhaRepository.findByNome(nome);
+    }
+
+    public void apagar(Long id){
+        cozinhaRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        cozinhaRepository.deleteById(id);
     }
 
 }

@@ -4,8 +4,11 @@ import br.com.helenharumi.hafood.dto.CozinhaDTO;
 import br.com.helenharumi.hafood.entity.Cozinha;
 import br.com.helenharumi.hafood.service.CozinhaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RestController
@@ -16,9 +19,9 @@ public class CozinhaController {
     private CozinhaService cozinhaService;
 
     @PostMapping
-    public Cozinha salvar(@RequestBody CozinhaDTO cozinha){
-
-        return cozinhaService.salvar(cozinha);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Cozinha salvar(@RequestBody CozinhaDTO cozinhaDTO){
+        return cozinhaService.salvar(cozinhaDTO);
     }
 
     @GetMapping
@@ -29,5 +32,15 @@ public class CozinhaController {
     @GetMapping("/buscar")
     public Cozinha buscar(@RequestParam("nome") String nome){
         return cozinhaService.buscar(nome);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity apagar(@PathVariable(name="id") Long id) {
+        try {
+            cozinhaService.apagar(id);
+            return ResponseEntity.noContent().build();
+        }catch (EntityNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 }
